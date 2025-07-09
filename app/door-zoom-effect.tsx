@@ -1,11 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Component() {
   const [scale, setScale] = useState(1);
   const [isZoomMode, setIsZoomMode] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+
+  const router = useRouter();
 
   useEffect(() => {
     let currentScale = 1;
@@ -46,11 +49,15 @@ export default function Component() {
         // Direct check instead of relying on state
         e.preventDefault();
 
-        const zoomSpeed = 0.008;
+        const zoomSpeed = 0.004;
         currentScale += e.deltaY * zoomSpeed;
         currentScale = Math.max(1, Math.min(currentScale, 8));
 
         setScale(currentScale);
+        if (currentScale == 8) {
+          //   console.log("redirecting");
+          router.push("/story");
+        }
         console.log("Zooming:", currentScale);
       }
     };
@@ -74,27 +81,12 @@ export default function Component() {
   return (
     <div className="relative">
       {/* Enhanced debug info */}
-      <div className="fixed top-4 left-4 z-50 bg-black/90 text-white p-4 rounded text-sm font-mono border-2 border-red-500">
-        <div className="text-green-400">
-          Zoom Mode: {isZoomMode ? "✅ ON" : "❌ OFF"}
-        </div>
-        <div>Scale: {scale.toFixed(2)}x</div>
-        <div>Scroll: {scrollY.toFixed(0)}px</div>
-        <div>Activation: {activationPoint.toFixed(0)}px</div>
-        <div>Progress: {progress.toFixed(0)}%</div>
-        <div className="mt-2 bg-gray-700 h-2 rounded">
-          <div
-            className="bg-red-500 h-2 rounded transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
 
       {/* Scrollable content */}
       <div style={{ height: "300vh", width: "100%" }}>
         <div
           style={{
-            height: "300vh",
+            height: "250vh",
             width: "100vw",
             backgroundImage: "url('/bg_image.png')",
             backgroundSize: "cover",
@@ -160,24 +152,6 @@ export default function Component() {
           </div>
         </div>
       </div>
-
-      {/* Activation zone indicator */}
-      {progress > 80 && !isZoomMode && (
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-          <div className="bg-yellow-600/90 text-white px-6 py-3 rounded-lg animate-pulse">
-            ⚡ Almost ready! Scroll a bit more...
-          </div>
-        </div>
-      )}
-
-      {/* Zoom mode indicator */}
-      {isZoomMode && (
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-          <div className="bg-red-600/90 text-white px-8 py-4 rounded-lg text-xl font-bold animate-pulse">
-            🚪 ZOOM MODE - USE MOUSE WHEEL - {scale.toFixed(1)}x
-          </div>
-        </div>
-      )}
     </div>
   );
 }
