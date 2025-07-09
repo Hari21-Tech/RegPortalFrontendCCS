@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Nav from "./_components/Nav";
 
 export default function Component() {
   const [scale, setScale] = useState(1);
@@ -116,39 +117,27 @@ export default function Component() {
 
       {/* Content */}
       <div className="absolute top-0 left-0 right-0 z-20">
-        <div className="h-screen flex items-center justify-center">
-          <div className="bg-black/80 p-8 rounded-lg text-white text-center max-w-md">
-            <h1 className="text-4xl font-bold mb-4">🚪 Portal Door</h1>
-            <p className="mb-4">Scroll down to activate zoom mode</p>
-            <div className="text-sm">
-              <div>Progress: {progress.toFixed(0)}%</div>
-              <div className="bg-gray-700 h-3 rounded mt-2">
-                <div
-                  className="bg-red-500 h-3 rounded transition-all"
-                  style={{ width: `${progress}%` }}
-                />
+        <Nav />
+        {/* <div className="h-screen flex items-center justify-center">
+         */}
+        <div className="flex items-center justify-center pt-16 px-4 min-h-[calc(100vh-80px)]">
+          {/* <div> */}
+          {/* </div> */}
+          <div className=" p-8 rounded-lg text-white text-center max-w-md">
+            <h1 className="text-white text-[250px] pb-4 font-megarok flex justify-center">
+              OBSCURA
+            </h1>
+            <div className="flex flex-row font-megarok justify-center items-center text-8xl space-x-2">
+              <div className="flex items-center flex-col">
+                <div>2</div>
+                <p>days</p>
+              </div>
+              <img src="/hourglass.png" className="w-24" />
+              <div className="flex items-center flex-col">
+                <div>24</div>
+                <p>hours</p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="h-screen flex items-center justify-center">
-          <div className="bg-black/80 p-8 rounded-lg text-white text-center max-w-md">
-            <h2 className="text-3xl font-bold mb-4">
-              {isZoomMode
-                ? "🎯 ZOOM ACTIVE!"
-                : `${progress < 100 ? "Keep Scrolling..." : "Almost There!"}`}
-            </h2>
-            <p className="text-lg">
-              {isZoomMode
-                ? "🖱️ Use mouse wheel to zoom into the door!"
-                : `${(100 - progress).toFixed(0)}% to go`}
-            </p>
-            {isZoomMode && (
-              <div className="mt-4 text-2xl animate-bounce">
-                Current Zoom: {scale.toFixed(1)}x
-              </div>
-            )}
           </div>
         </div>
       </div>
