@@ -8,6 +8,7 @@
   src: url("/fonts/Megarok.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap; /* Prevents flash, shows fallback until custom font loads */
 }
 
 /* === Dark Theme Variables === */
