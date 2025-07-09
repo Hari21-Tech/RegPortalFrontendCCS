@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Nav from "./_components/Nav";
 
 const Home: React.FC = () => {
