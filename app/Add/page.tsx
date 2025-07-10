@@ -76,7 +76,7 @@ export default function CreateTeamPage() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="min-h-screen bg-black text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
+        {/* <div className="absolute inset-0 opacity-30">
           <svg
             className="w-full h-full"
             viewBox="0 0 800 600"
@@ -114,7 +114,35 @@ export default function CreateTeamPage() {
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit)" />
           </svg>
-        </div>
+        </div> */}
+        <Box className="absolute inset-0 opacity-30">
+          <svg width="100%" height="100%" className="absolute inset-0">
+            <defs>
+              <pattern
+                id="circuit"
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M20 20h60v20h-20v20h-20v20h-20z"
+                  fill="none"
+                  stroke="#dc2626"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M80 40h-20v20h20v20h-40v-20h-20"
+                  fill="none"
+                  stroke="#dc2626"
+                  strokeWidth="2"
+                />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#circuit)" />
+          </svg>
+        </Box>
 
         <Box className="relative z-10  pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
           <div className="flex items-center space-x-3">

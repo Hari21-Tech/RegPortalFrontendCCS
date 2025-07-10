@@ -76,13 +76,8 @@ export default function JoinTeam() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="min-h-screen bg-black text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <svg
-            className="w-full h-full"
-            viewBox="0 0 800 600"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <Box className="absolute inset-0 opacity-30">
+          <svg width="100%" height="100%" className="absolute inset-0">
             <defs>
               <pattern
                 id="circuit"
@@ -93,29 +88,22 @@ export default function JoinTeam() {
                 patternUnits="userSpaceOnUse"
               >
                 <path
-                  d="M20 20h60v20h-20v20h-20v20h-20v-60z M60 60h20v20h-20v-20z M40 40h20v-20h20v20h-20v20h-20v-20z"
+                  d="M20 20h60v20h-20v20h-20v20h-20z"
+                  fill="none"
                   stroke="#dc2626"
                   strokeWidth="2"
-                  fill="none"
                 />
                 <path
-                  d="M0 50h20v20h20v-20h20v20h20v-20h20"
+                  d="M80 40h-20v20h20v20h-40v-20h-20"
+                  fill="none"
                   stroke="#dc2626"
                   strokeWidth="2"
-                  fill="none"
-                />
-                <path
-                  d="M50 0v20h20v20h-20v20h20v20h-20v20"
-                  stroke="#dc2626"
-                  strokeWidth="2"
-                  fill="none"
                 />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit)" />
           </svg>
-        </div>
-
+        </Box>
         <Box className="relative z-10  pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
           <div className="flex items-center space-x-3">
             <CcsLogo />
