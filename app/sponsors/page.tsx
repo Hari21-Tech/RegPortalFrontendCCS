@@ -59,7 +59,7 @@ export default function Page() {
         </div>
 
         <h1 className="text-white text-[80px] sm:text-[80px] md:text-[160px] lg:text-[140px] xl:text-[180px] font-megarok text-center leading-none tracking-wider drop-shadow-2xl mb-2">
-          Our Sponsers
+          Our Sponsors
         </h1>
         <Grid
           container
