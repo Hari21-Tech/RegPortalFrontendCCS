@@ -18,6 +18,8 @@ type Member = {
   email: string;
   is_wizard: boolean;
   is_hacker: boolean;
+  name: string;
+  id: string;
 };
 
 export default function TeamDashboard() {
@@ -35,11 +37,13 @@ export default function TeamDashboard() {
       );
 
       const data = await res.json();
+      console.log(data);
       if (!res.ok) throw new Error(data.error || "Failed to fetch dashboard");
 
       const players: Member[] = data.players.map((p: any) => ({
-        // name: p.name,
+        name: p.name,
         email: p.email,
+        id: p.id,
         // phone: p.phone,
         is_wizard: p.is_wizard ?? true,
         is_hacker: p.is_hacker ?? false,
@@ -92,6 +96,8 @@ export default function TeamDashboard() {
           body: JSON.stringify(payload),
         }
       );
+
+      console.log(JSON.stringify(payload));
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Unknown error");
