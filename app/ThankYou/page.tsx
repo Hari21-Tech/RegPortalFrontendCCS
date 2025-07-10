@@ -85,6 +85,7 @@ export default function ThankYouPage() {
             // variant="outlined"
             className="text-white"
             sx={{
+              padding: 1.5,
               bgcolor: "red",
               borderRadius: "8px",
               mt: 4,
@@ -98,7 +99,7 @@ export default function ThankYouPage() {
             }}
             href="/Dashboard"
           >
-            <Typography fontSize="30px" fontFamily="megarok" color="white">
+            <Typography fontSize="50px" fontFamily="megarok" color="white">
               GO TO DASHBOARD
             </Typography>
           </Button>
