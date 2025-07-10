@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 // import AddBg from "./components/AddBg";
 import CcsLogo from "../_components/CcsLogo";
+import { useRouter } from "next/navigation";
 
 const darkTheme = createTheme({
   palette: {
@@ -73,6 +74,8 @@ const darkTheme = createTheme({
 });
 
 export default function JoinTeam() {
+  const router = useRouter();
+
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -186,13 +189,14 @@ export default function JoinTeam() {
                     fontSize: "20px",
                   }}
                 >
-                  Team Name
+                  Team Code
                 </Typography>
 
                 <TextField fullWidth variant="outlined" className="w-full" />
 
                 <Box className="pt-2 md:pt-4">
                   <Button
+                    onClick={() => router.push("/Dashboard")}
                     fullWidth
                     variant="outlined"
                     className="w-full bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"
