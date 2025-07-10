@@ -2,8 +2,12 @@
 
 import { Box, Container, Typography, Paper, Button } from "@mui/material";
 import CcsLogo from "../_components/CcsLogo";
+import { useSearchParams } from "next/navigation";
 
 export default function ThankYouPage() {
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code");
+
   return (
     <Box className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4">
       {/* Background Pattern */}
@@ -71,7 +75,7 @@ export default function ThankYouPage() {
               className="text-red-500 font-bold text-center"
               sx={{ fontFamily: "monospace" }}
             >
-              YOUR TEAM CODE
+              {code}
             </Typography>
             <Typography
               className="text-white text-2xl md:text-3xl font-bold tracking-wider mt-2"

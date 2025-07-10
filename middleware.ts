@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("session_token");
 
   if (!token) {
-    alert("Access Denied , Kindly Login");
+    // alert("Access Denied , Kindly Login");
     return NextResponse.redirect(new URL("/", req.url));
   }
 

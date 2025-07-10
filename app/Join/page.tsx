@@ -1,3 +1,216 @@
+// "use client";
+
+// import {
+//   TextField,
+//   Button,
+//   Typography,
+//   Box,
+//   Container,
+//   Paper,
+//   ThemeProvider,
+//   createTheme,
+// } from "@mui/material";
+// // import AddBg from "./components/AddBg";
+// import CcsLogo from "../_components/CcsLogo";
+// import { useRouter } from "next/navigation";
+
+// const darkTheme = createTheme({
+//   palette: {
+//     mode: "dark",
+//     primary: {
+//       main: "#fff",
+//     },
+//     background: {
+//       default: "#000000",
+//       paper: "transparent",
+//     },
+//     text: {
+//       primary: "#ffffff",
+//     },
+//   },
+//   components: {
+//     MuiTextField: {
+//       styleOverrides: {
+//         root: {
+//           "& .MuiOutlinedInput-root": {
+//             "& fieldset": {
+//               borderColor: "#ffffff",
+//               borderWidth: "2px",
+//             },
+//             "&:hover fieldset": {
+//               borderColor: "#dc2626",
+//             },
+//             "&.Mui-focused fieldset": {
+//               borderColor: "#dc2626",
+//             },
+//           },
+//           "& .MuiInputLabel-root": {
+//             color: "#ffffff",
+//             fontWeight: "bold",
+//             fontSize: "0.875rem",
+//             letterSpacing: "0.05em",
+//           },
+//           "& .MuiOutlinedInput-input": {
+//             color: "#ffffff",
+//             height: "1.5rem",
+//           },
+//         },
+//       },
+//     },
+//     MuiButton: {
+//       styleOverrides: {
+//         root: {
+//           borderWidth: "2px",
+//           fontWeight: "bold",
+//           letterSpacing: "0.05em",
+//           height: "3rem",
+//           "&:hover": {
+//             borderWidth: "2px",
+//           },
+//         },
+//       },
+//     },
+//   },
+// });
+
+// export default function JoinTeam() {
+//   const router = useRouter();
+
+//   return (
+//     <ThemeProvider theme={darkTheme}>
+//       <div className="min-h-screen bg-black text-white relative overflow-hidden  ">
+//         <Box className="absolute inset-0 opacity-30">
+//           <svg width="100%" height="100%" className="absolute inset-0">
+//             <defs>
+//               <pattern
+//                 id="circuit"
+//                 x="0"
+//                 y="0"
+//                 width="100"
+//                 height="100"
+//                 patternUnits="userSpaceOnUse"
+//               >
+//                 <path
+//                   d="M20 20h60v20h-20v20h-20v20h-20z"
+//                   fill="none"
+//                   stroke="#dc2626"
+//                   strokeWidth="2"
+//                 />
+//                 <path
+//                   d="M80 40h-20v20h20v20h-40v-20h-20"
+//                   fill="none"
+//                   stroke="#dc2626"
+//                   strokeWidth="2"
+//                 />
+//               </pattern>
+//             </defs>
+//             <rect width="100%" height="100%" fill="url(#circuit)" />
+//           </svg>
+//         </Box>
+//         <Box className="relative z-10  pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
+//           <div className="flex items-center space-x-3">
+//             <CcsLogo />
+//           </div>
+//         </Box>
+
+//         <Container maxWidth="sm" className="relative z-10 px-4 md:px-6">
+//           <Box className="flex flex-col items-center justify-center  space-y-6 md:space-y-1">
+//             <Typography
+//               variant="h2"
+//               className="text-3xl md:text-4xl lg:text-5xl font-bold text-center tracking-wider mb-4 md:mb-8"
+//               sx={{ fontFamily: "megarok", fontSize: "80px" }}
+//             >
+//               Join a team
+//             </Typography>
+
+//             <Paper
+//               elevation={0}
+//               className="w-full border-4 border-white bg-transparent p-4 md:p-6 lg:p-8 space-y-4 md:space-y-6"
+//             >
+//               <Box className="space-y-4 md:space-y-6">
+//                 <Typography
+//                   className="sm:text-2xl md:text-8xl"
+//                   sx={{
+//                     fontFamily: "GothamXNarrow",
+//                     fontWeight: "bold",
+//                     fontSize: "20px",
+//                   }}
+//                 >
+//                   Name
+//                 </Typography>
+//                 <TextField fullWidth variant="outlined" className="w-full" />
+//                 <Typography
+//                   sx={{
+//                     fontFamily: "GothamXNarrow",
+//                     fontWeight: "bold",
+//                     fontSize: "20px",
+//                   }}
+//                 >
+//                   Email
+//                 </Typography>
+
+//                 <TextField
+//                   fullWidth
+//                   type="email"
+//                   variant="outlined"
+//                   className="w-full"
+//                 />
+//                 <Typography
+//                   sx={{
+//                     fontFamily: "GothamXNarrow",
+//                     fontWeight: "bold",
+//                     fontSize: "20px",
+//                   }}
+//                 >
+//                   Phone No
+//                 </Typography>
+
+//                 <TextField
+//                   fullWidth
+//                   type="tel"
+//                   variant="outlined"
+//                   className="w-full"
+//                 />
+//                 <Typography
+//                   sx={{
+//                     fontFamily: "GothamXNarrow",
+//                     fontWeight: "bold",
+//                     fontSize: "20px",
+//                   }}
+//                 >
+//                   Team Code
+//                 </Typography>
+
+//                 <TextField fullWidth variant="outlined" className="w-full" />
+
+//                 <Box className="pt-2 md:pt-4">
+//                   <Button
+//                     onClick={() => router.push("/Dashboard")}
+//                     fullWidth
+//                     variant="outlined"
+//                     className="w-full bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"
+//                   >
+//                     SUBMIT
+//                   </Button>
+
+//                   <Button
+//                     onClick={() => router.push("/Add")}
+//                     fullWidth
+//                     variant="outlined"
+//                     className="w-full mt-4 bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"
+//                   >
+//                     Or Create team
+//                   </Button>
+//                 </Box>
+//               </Box>
+//             </Paper>
+//           </Box>
+//         </Container>
+//       </div>
+//     </ThemeProvider>
+//   );
+// }
+
 "use client";
 
 import {
@@ -10,23 +223,16 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
-// import AddBg from "./components/AddBg";
 import CcsLogo from "../_components/CcsLogo";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
-    primary: {
-      main: "#fff",
-    },
-    background: {
-      default: "#000000",
-      paper: "transparent",
-    },
-    text: {
-      primary: "#ffffff",
-    },
+    primary: { main: "#fff" },
+    background: { default: "#000", paper: "transparent" },
+    text: { primary: "#fff" },
   },
   components: {
     MuiTextField: {
@@ -37,12 +243,8 @@ const darkTheme = createTheme({
               borderColor: "#ffffff",
               borderWidth: "2px",
             },
-            "&:hover fieldset": {
-              borderColor: "#dc2626",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "#dc2626",
-            },
+            "&:hover fieldset": { borderColor: "#dc2626" },
+            "&.Mui-focused fieldset": { borderColor: "#dc2626" },
           },
           "& .MuiInputLabel-root": {
             color: "#ffffff",
@@ -64,9 +266,7 @@ const darkTheme = createTheme({
           fontWeight: "bold",
           letterSpacing: "0.05em",
           height: "3rem",
-          "&:hover": {
-            borderWidth: "2px",
-          },
+          "&:hover": { borderWidth: "2px" },
         },
       },
     },
@@ -75,10 +275,43 @@ const darkTheme = createTheme({
 
 export default function JoinTeam() {
   const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [teamCode, setTeamCode] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/join-team`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            username,
+            team_code: teamCode,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error || "Failed to join team");
+      } else {
+        alert("Team joined successfully!");
+        router.push("/Dashboard");
+      }
+    } catch (err) {
+      console.error("Error joining team", err);
+      alert("Something went wrong!");
+    }
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className="min-h-screen bg-black text-white relative overflow-hidden  ">
+      <div className="min-h-screen bg-black text-white relative overflow-hidden">
         <Box className="absolute inset-0 opacity-30">
           <svg width="100%" height="100%" className="absolute inset-0">
             <defs>
@@ -107,14 +340,15 @@ export default function JoinTeam() {
             <rect width="100%" height="100%" fill="url(#circuit)" />
           </svg>
         </Box>
-        <Box className="relative z-10  pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
+
+        <Box className="relative z-10 pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
           <div className="flex items-center space-x-3">
             <CcsLogo />
           </div>
         </Box>
 
         <Container maxWidth="sm" className="relative z-10 px-4 md:px-6">
-          <Box className="flex flex-col items-center justify-center  space-y-6 md:space-y-1">
+          <Box className="flex flex-col items-center justify-center space-y-6 md:space-y-1">
             <Typography
               variant="h2"
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-center tracking-wider mb-4 md:mb-8"
@@ -129,7 +363,6 @@ export default function JoinTeam() {
             >
               <Box className="space-y-4 md:space-y-6">
                 <Typography
-                  className="sm:text-2xl md:text-8xl"
                   sx={{
                     fontFamily: "GothamXNarrow",
                     fontWeight: "bold",
@@ -138,39 +371,13 @@ export default function JoinTeam() {
                 >
                   Name
                 </Typography>
-                <TextField fullWidth variant="outlined" className="w-full" />
-                <Typography
-                  sx={{
-                    fontFamily: "GothamXNarrow",
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                  }}
-                >
-                  Email
-                </Typography>
-
                 <TextField
                   fullWidth
-                  type="email"
                   variant="outlined"
-                  className="w-full"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
-                <Typography
-                  sx={{
-                    fontFamily: "GothamXNarrow",
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                  }}
-                >
-                  Phone No
-                </Typography>
 
-                <TextField
-                  fullWidth
-                  type="tel"
-                  variant="outlined"
-                  className="w-full"
-                />
                 <Typography
                   sx={{
                     fontFamily: "GothamXNarrow",
@@ -180,12 +387,16 @@ export default function JoinTeam() {
                 >
                   Team Code
                 </Typography>
-
-                <TextField fullWidth variant="outlined" className="w-full" />
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  value={teamCode}
+                  onChange={(e) => setTeamCode(e.target.value)}
+                />
 
                 <Box className="pt-2 md:pt-4">
                   <Button
-                    onClick={() => router.push("/Dashboard")}
+                    onClick={handleSubmit}
                     fullWidth
                     variant="outlined"
                     className="w-full bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"
