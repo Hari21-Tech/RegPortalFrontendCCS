@@ -5,33 +5,38 @@ import { useRouter } from "next/navigation";
 export default function OAuthRedirect() {
   const router = useRouter();
 
-  //   useEffect(() => {
-  //     const params = new URLSearchParams(window.location.search);
-  //     const sessionId = params.get("session_id");
+  // useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   const token = params.get("token");
+  //   const name = params.get("name");
+  //   const email = params.get("email");
 
-  //     if (sessionId) {
-  //       localStorage.setItem("session_id", sessionId);
-  //       console.log(sessionId);
-  //       router.replace("/redirect");
-  //     } else {
-  //       router.replace("/login");
-  //     }
-  //   }, [router]);
+  //   if (token) {
+  //     localStorage.setItem("token", token);
+  //     localStorage.setItem("name", name || "");
+  //     localStorage.setItem("email", email || "");
+  //     router.replace("/register");
+  //   } else {
+  //     router.replace("/login");
+  //   }
+  // }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    const name = params.get("name");
-    const email = params.get("email");
+    fetch(`${process.env.NEXT_PUBLIC_CALLBACK_URL}`, {
+      credentials: "include",
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error("Unauthorized");
+        const data = await res.json();
 
-    if (token) {
-      localStorage.setItem("token", token);
-      localStorage.setItem("name", name || "");
-      localStorage.setItem("email", email || "");
-      router.replace("/dashboard");
-    } else {
-      router.replace("/login");
-    }
+        localStorage.setItem("name", data.name);
+        localStorage.setItem("email", data.email);
+
+        router.replace("/register");
+      })
+      .catch(() => {
+        router.replace("/login");
+      });
   }, []);
 
   return <p>Redirecting...</p>;

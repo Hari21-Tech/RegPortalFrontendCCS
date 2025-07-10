@@ -39,21 +39,18 @@ export default function Story() {
     return () => clearTimeout(timer);
   }, []);
 
-  const [sessionId, setSessionId] = useState<String>("");
-
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const sid = params.get("session_id");
-    if (sid) setSessionId(sid);
+    fetch(`${process.env.NEXT_PUBLIC_CALLBACK_URL}`, {
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        router.replace("/register");
+      }
+    });
   }, []);
+
   const handleLogin = () => {
-    const callbackUrl = process.env.NEXT_PUBLIC_CALLBACK_URL;
-    console.log(callbackUrl);
-    // console.log(`helo`);
-    if (!callbackUrl) {
-      throw new Error("NEXT_PUBLIC_CALLBACK_URL is not defined");
-    }
-    window.location.href = callbackUrl;
+    window.location.href = `${process.env.NEXT_PUBLIC_CALLBACK_URL}`;
   };
 
   useEffect(() => {
@@ -105,7 +102,7 @@ export default function Story() {
   }
 
   return (
-    <div className="min-h-screen bg-blacktext-[#ff3300] text-xl font-mono px-4 py-10 flex flex-col items-center">
+    <div className="min-h-screen bg-black text-[#ff3300] text-xl font-mono px-4 py-10 flex flex-col items-center">
       <div className="w-full max-w-4xl text-lg leading-relaxed whitespace-pre-wrap">
         {displayedText}
         {!isComplete && (
