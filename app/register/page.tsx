@@ -1,9 +1,14 @@
+"use client";
+
 import Bg from "./components/Bg";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CcsLogo from "../_components/CcsLogo";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
       <Bg />
@@ -22,6 +27,7 @@ export default function RegisterPage() {
 
           <div className="flex flex-col items-center space-y-12 w-full mb-4 md:mb-0">
             <Button
+              onClick={() => router.push("/Join")}
               sx={{
                 bgcolor: "black",
                 width: "100%",
@@ -47,6 +53,7 @@ export default function RegisterPage() {
             </Button>
 
             <Button
+              onClick={() => router.push("/Add")}
               sx={{
                 bgcolor: "black",
                 width: "100%",
