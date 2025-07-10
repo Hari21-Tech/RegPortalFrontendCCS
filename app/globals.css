@@ -10,6 +10,13 @@
   font-style: normal;
   font-display: swap; /* Prevents flash, shows fallback until custom font loads */
 }
+@font-face {
+  font-family: "Kdam Thmor Pro";
+  src: url("/fonts/KdamThmorPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Prevents flash, shows fallback until custom font loads */
+}
 
 /* === Dark Theme Variables === */
 :root {
@@ -66,6 +73,9 @@ body {
 
   .font-megarok {
     font-family: "megarok", sans-serif;
+  }
+  .font-Kdam_Thmor_Pro {
+    font-family: "Kdam_Thmor_Pro", sans-serif;
   }
 
   .btn-glass {

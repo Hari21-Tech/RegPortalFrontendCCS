@@ -53,6 +53,7 @@ const config: Config = {
       },
       fontFamily: {
         megarok: ["megarok", "sans-serif"], // ✅ Register font-megarok utility
+        Kdam_Thmor_Pro: ["Kdam_Thmor_Pro", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

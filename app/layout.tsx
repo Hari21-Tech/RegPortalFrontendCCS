@@ -21,6 +21,13 @@ export default function RootLayout({
           type="font/otf"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/fonts/KdamThmorPro-Regular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>{children}</body>
     </html>
