@@ -56,20 +56,19 @@
 
 // export { Button, buttonVariants };
 
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+// import Button from "@mui/material/Button";
+// import Box from "@mui/material/Box";
 
-const ButtonComponent = () => {
-  return (
-    <Button
-      sx={{
-        width: "400px",
-        height: "120px",
-        border: "3px solid #00000075",
-        boxShadow: "1px 10px 4px 0px #FFFFFFCF",
-      }}
-    />
-  );
-};
+// const ButtonComponent = ({children}) => {
+//   return (
+//     <Button
+//       sx={{
 
-export default ButtonComponent;
+//       }}
+//     >
+//       {children}
+//       </Button>
+//   );
+// };
+
+// export default ButtonComponent;

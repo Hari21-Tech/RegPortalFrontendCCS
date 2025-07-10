@@ -39,6 +39,23 @@ export default function Story() {
     return () => clearTimeout(timer);
   }, []);
 
+  const [sessionId, setSessionId] = useState<String>("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sid = params.get("session_id");
+    if (sid) setSessionId(sid);
+  }, []);
+  const handleLogin = () => {
+    const callbackUrl = process.env.NEXT_PUBLIC_CALLBACK_URL;
+    console.log(callbackUrl);
+    // console.log(`helo`);
+    if (!callbackUrl) {
+      throw new Error("NEXT_PUBLIC_CALLBACK_URL is not defined");
+    }
+    window.location.href = callbackUrl;
+  };
+
   useEffect(() => {
     if (!loading && !isComplete && currentIndex < story.length) {
       const timer = setTimeout(() => {
@@ -111,7 +128,7 @@ export default function Story() {
           </Button>
         )}
         {isComplete && (
-          <Button onClick={() => router.push("/register")} sx={sharedButtonSx}>
+          <Button onClick={handleLogin} sx={sharedButtonSx}>
             <Typography>Register</Typography>
           </Button>
         )}
