@@ -37,7 +37,6 @@ export default function TeamDashboard() {
       );
 
       const data = await res.json();
-      console.log(data);
       if (!res.ok) throw new Error(data.error || "Failed to fetch dashboard");
 
       const players: Member[] = data.players.map((p: any) => ({
@@ -79,10 +78,7 @@ export default function TeamDashboard() {
       players: members,
     };
 
-    console.log(teamCode);
-
     // console.log(`players:${members}`);
-    console.log("players:", members);
 
     try {
       const res = await fetch(
@@ -97,8 +93,6 @@ export default function TeamDashboard() {
         }
       );
 
-      console.log(JSON.stringify(payload));
-
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Unknown error");
 
@@ -107,6 +101,28 @@ export default function TeamDashboard() {
       alert(
         `Save failed: ${err instanceof Error ? err.message : "Unknown error"}`
       );
+    }
+  };
+  const handleLogout = async () => {
+    console.log("Logout oressed");
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.detail || "Logout failed");
+      }
+
+      alert("Logged out successfully!");
+
+      window.location.href = "/";
+    } catch (err) {
+      console.error("Logout error:", err);
+      alert("An error occurred during logout");
     }
   };
 
@@ -237,6 +253,14 @@ export default function TeamDashboard() {
           <rect width="100%" height="100%" fill="url(#circuit)" />
         </svg>
       </Box>
+      <Box position="absolute" top={4} right={4}>
+        <Button
+          onClick={handleLogout}
+          sx={{ bgcolor: "red", borderRadius: "8px" }}
+        >
+          <Typography color="white">Log Out</Typography>
+        </Button>
+      </Box>
 
       <Container maxWidth="sm" className="relative z-10">
         <Box display="flex" justifyContent="center" mb={4}>
@@ -253,11 +277,11 @@ export default function TeamDashboard() {
         {isLeader && (
           <Box className="flex justify-center mt-8">
             <Button
-              variant="outlined"
+              sx={{ bgcolor: "red", borderRadius: "8px" }}
               onClick={handleSave}
               className="bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"
             >
-              Save Roles
+              <Typography color="white">Save Roles</Typography>
             </Button>
           </Box>
         )}
