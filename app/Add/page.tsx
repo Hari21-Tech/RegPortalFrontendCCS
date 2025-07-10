@@ -225,7 +225,7 @@ export default function CreateTeamPage() {
 
                 <Box className="pt-2 md:pt-4">
                   <Button
-                    onClick={() => router.push("/Dashboard")}
+                    onClick={() => router.push("/ThankYou")}
                     fullWidth
                     variant="outlined"
                     className="w-full bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"

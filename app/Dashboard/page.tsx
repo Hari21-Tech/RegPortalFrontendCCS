@@ -27,7 +27,7 @@ export default function TeamDashboard() {
   };
 
   return (
-    <Box className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4">
+    <Box className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4 pb-32">
       <Box className="absolute inset-0 opacity-30">
         <svg width="100%" height="100%" className="absolute inset-0">
           <defs>

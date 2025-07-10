@@ -78,7 +78,7 @@ export default function JoinTeam() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <div className="min-h-screen bg-black text-white relative overflow-hidden  ">
         <Box className="absolute inset-0 opacity-30">
           <svg width="100%" height="100%" className="absolute inset-0">
             <defs>
