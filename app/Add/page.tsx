@@ -140,7 +140,7 @@ export default function CreateTeamPage() {
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-center tracking-wider mb-4 md:mb-8"
               sx={{ fontFamily: "megarok", fontSize: "80px" }}
             >
-              CREATE A TEAM
+              Create a team
             </Typography>
 
             <Paper
