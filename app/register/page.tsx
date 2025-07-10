@@ -17,10 +17,10 @@ export default function RegisterPage() {
         <CcsLogo />
       </div>
 
-      <div className="flex h-full w-full">
+      <div className="flex justify-center h-full w-full">
         <div className="hidden md:flex flex-1" />
 
-        <div className="flex flex-col justify-between md:justify-center items-center w-full md:max-w-md px-4 md:pr-36 py-6">
+        <div className="flex flex-col justify-between md:justify-center items-center w-full md:max-w-md px-4 md:pr-36 py-6 md:mr-32">
           <h1 className="text-7xl md:text-9xl md:mb-20 font-bold tracking-widest font-megarok text-center mt-28 md:mt-0">
             REGISTER NOW
           </h1>
