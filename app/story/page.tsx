@@ -40,7 +40,7 @@ export default function Story() {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_CALLBACK_URL}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
       credentials: "include",
     }).then((res) => {
       if (res.ok) {
@@ -50,8 +50,8 @@ export default function Story() {
   }, []);
 
   const handleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_CALLBACK_URL}`;
-  };
+  window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`;
+};
 
   useEffect(() => {
     if (!loading && !isComplete && currentIndex < story.length) {
