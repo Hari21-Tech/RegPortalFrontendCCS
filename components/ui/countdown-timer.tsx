@@ -3,6 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAnimate } from "framer-motion";
 
+type TimeUnit = "Day" | "Hour" | "Minute" | "Second";
+
+interface CountdownItemProps {
+  unit: TimeUnit;
+  label: string;
+}
+
 // Change this date to your target countdown date
 const COUNTDOWN_FROM = "2025-07-19T18:00:00";
 
@@ -15,13 +22,14 @@ export default function ShiftingCountdown() {
   return (
     <div className="flex flex-row font-megarok justify-center items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl space-x-4 md:space-x-6 lg:space-x-8 mb-16">
       <CountdownItem unit="Day" label="DAYS" />
-      <img src="/hourglass.png" className="w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 filter drop-shadow-lg" />
       <CountdownItem unit="Hour" label="HOURS" />
+      <CountdownItem unit="Minute" label="MINUTES" />
+      <CountdownItem unit="Second" label="SECONDS" />
     </div>
   );
 }
 
-function CountdownItem({ unit, label }) {
+function CountdownItem({ unit, label }: CountdownItemProps) {
   const { ref, time } = useTimer(unit);
   // For seconds, ensure two digits (00–59)
   const display = unit === "Second" ? String(time).padStart(2, '0') : time;
@@ -43,23 +51,27 @@ function CountdownItem({ unit, label }) {
   );
 }
 
-function useTimer(unit) {
+function useTimer(unit: TimeUnit) {
   const [ref, animate] = useAnimate();
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeRef = useRef(0);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
     handleCountdown();
     intervalRef.current = setInterval(handleCountdown, 1000);
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCountdown = async () => {
     const end = new Date(COUNTDOWN_FROM);
     const now = new Date();
-    const distance = end - now;
+    const distance = end.getTime() - now.getTime();
 
     let newTime = 0;
     switch (unit) {
