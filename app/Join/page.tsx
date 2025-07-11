@@ -12,7 +12,7 @@ export default function JoinTeam() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [discord_id, setDiscordId] = useState("");
   const [teamCode, setTeamCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +29,7 @@ export default function JoinTeam() {
           credentials: "include",
           body: JSON.stringify({
             username,
+            discord_id,
             team_code: teamCode,
           }),
         }
@@ -62,7 +63,6 @@ export default function JoinTeam() {
 
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/40 to-black/60 z-0"></div>
 
-
       {/* Header */}
       <div className="relative z-10 pt-4 md:pt-6 flex items-center justify-between px-4 md:px-6">
         <div className="flex items-center">
@@ -75,7 +75,10 @@ export default function JoinTeam() {
         <div className="w-full max-w-md mx-auto">
           <h1
             className="text-4xl md:text-5xl font-bold text-center mb-8 md:mb-10 tracking-wider"
-            style={{ fontFamily: "megarok", textShadow: "0 0 8px rgba(239, 68, 68, 0.9)" }}
+            style={{
+              fontFamily: "megarok",
+              textShadow: "0 0 8px rgba(239, 68, 68, 0.9)",
+            }}
           >
             Join a team
           </h1>
@@ -89,7 +92,9 @@ export default function JoinTeam() {
 
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-red-100">Name</Label>
+                <Label htmlFor="name" className="text-red-100">
+                  Name
+                </Label>
                 <Input
                   id="name"
                   placeholder="Enter your name"
@@ -100,19 +105,23 @@ export default function JoinTeam() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="mobile" className="text-red-100">Mobile Number</Label>
+                <Label htmlFor="mobile" className="text-red-100">
+                  Discord Id
+                </Label>
                 <Input
-                  id="mobile"
-                  type="tel"
-                  placeholder="Enter your mobile number"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
+                  id="discord"
+                  type="id"
+                  placeholder="Enter your discord id"
+                  value={discord_id}
+                  onChange={(e) => setDiscordId(e.target.value)}
                   className="bg-red-900/20 border-red-500/50 focus:border-red-400 placeholder:text-red-300/50"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-red-100">Email</Label>
+                <Label htmlFor="email" className="text-red-100">
+                  Email
+                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -124,7 +133,9 @@ export default function JoinTeam() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="teamCode" className="text-red-100">Team Code</Label>
+                <Label htmlFor="teamCode" className="text-red-100">
+                  Team Code
+                </Label>
                 <Input
                   id="teamCode"
                   placeholder="Enter your team code"

@@ -12,7 +12,7 @@ export default function CreateTeamPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [discordId, setDiscordId] = useState("");
   const [teamName, setTeamName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +29,8 @@ export default function CreateTeamPage() {
           credentials: "include",
           body: JSON.stringify({
             username,
+            email,
+            discord_id: discordId,
             team_name: teamName,
           }),
         }
@@ -69,7 +71,10 @@ export default function CreateTeamPage() {
         <div className="w-full max-w-md mx-auto">
           <h1
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 sm:mb-6 md:mb-8 tracking-wider glitch-text"
-            style={{ fontFamily: "megarok", textShadow: "0 0 8px rgba(255, 0, 0, 0.8)" }}
+            style={{
+              fontFamily: "megarok",
+              textShadow: "0 0 8px rgba(255, 0, 0, 0.8)",
+            }}
           >
             CREATE A TEAM
           </h1>
@@ -94,13 +99,13 @@ export default function CreateTeamPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="mobile">MOBILE NUMBER</Label>
+                <Label htmlFor="mobile">Discord Id</Label>
                 <Input
-                  id="mobile"
-                  type="tel"
-                  placeholder="Enter your mobile number"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
+                  id="discord"
+                  type="id"
+                  placeholder="Enter your discord id"
+                  value={discordId}
+                  onChange={(e) => setDiscordId(e.target.value)}
                 />
               </div>
               <div className="space-y-2">

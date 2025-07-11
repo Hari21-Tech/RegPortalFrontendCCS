@@ -20,6 +20,7 @@ type Role = "WIZARD" | "HACKER";
 type Member = {
   email: string;
   name: string;
+  discord_id: string;
   id: string;
   is_wizard: boolean;
   is_hacker: boolean;
@@ -33,18 +34,23 @@ export default function TeamDashboard() {
 
   const fetchDashboard = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`, {
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`,
+        {
+          credentials: "include",
+        }
+      );
       const data = await res.json();
+      console.log(data);
       if (!res.ok) throw new Error(data.error);
 
       const players: Member[] = data.players.map((p: any) => ({
         name: p.name,
         email: p.email,
+        discord_id: p.discord_id,
         id: p.id,
         is_wizard: p.is_wizard ?? false,
-        is_hacker: p.is_hacker ?? false,
+        is_hacker: p.is_hacker ?? true,
       }));
 
       setMembers(players);
@@ -81,12 +87,16 @@ export default function TeamDashboard() {
   };
 
   const handleSave = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ team_code: teamCode, players: members }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ team_code: teamCode, players: members }),
+      }
+    );
+    console.log(JSON.stringify({ team_code: teamCode, players: members }));
 
     const data = await res.json();
     if (!res.ok) alert(data.error || "Save failed");
@@ -111,10 +121,13 @@ export default function TeamDashboard() {
   const getRole = (member: Member) => (member.is_hacker ? "HACKER" : "WIZARD");
 
   const getAvatarUrl = (name: string) =>
-    `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${encodeURIComponent(name)}`;
+    `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${encodeURIComponent(
+      name
+    )}`;
 
   const renderCard = (member: Member, index: number, label: string) => {
     const role = getRole(member);
+    console.log(role);
     const bgColor = role === "HACKER" ? "#1E3A8A" : "#7F1D1D"; // blue/red
     const badgeColor = role === "HACKER" ? "#3B82F6" : "#EF4444";
 
@@ -160,7 +173,9 @@ export default function TeamDashboard() {
         </Box>
 
         {isLeader ? (
-          <Box sx={{ display: "flex", alignItems: "center", mt: { xs: 2, sm: 0 } }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center", mt: { xs: 2, sm: 0 } }}
+          >
             <ToggleButtonGroup
               value={role}
               exclusive
@@ -181,8 +196,7 @@ export default function TeamDashboard() {
               <ToggleButton value="HACKER">Hacker</ToggleButton>
               <ToggleButton value="WIZARD">Wizard</ToggleButton>
             </ToggleButtonGroup>
-
-            {/* Kick Button */}
+            {/* Kick Button
             {index !== 0 && (
               <Button
                 size="small"
@@ -192,7 +206,7 @@ export default function TeamDashboard() {
               >
                 Kick
               </Button>
-            )}
+            )} */}
           </Box>
         ) : (
           <Box
