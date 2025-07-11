@@ -5,6 +5,7 @@ import ShiftingCountdown from "../components/ui/countdown-timer";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 import { Instagram, LinkedinIcon, Sparkles, Github } from "lucide-react";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { useEffect } from "react";
