@@ -239,15 +239,17 @@ export default function Page() {
                         >
                             <ShimmerButton
                                 onClick={handleLogin}
-                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-red-600 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_20px_rgba(255,51,0,0.4)] hover:shadow-[0_0_30px_rgba(255,51,0,0.6)] hover:scale-105 border border-red-700"
+                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-purple-700 to-indigo-900 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out border-2 border-purple-500/70 hover:border-purple-400 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-800 hover:to-indigo-950 relative overflow-hidden group"
                             >
+                                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                                 🚀 Register Now
                             </ShimmerButton>
 
                             <ShimmerButton
                                 onClick={() => router.push("/Dashboard")}
-                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,165,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:scale-105 border border-orange-400/50"
+                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-blue-700 to-blue-900 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out border-2 border-blue-500/70 hover:border-blue-400 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-800 hover:to-blue-950 relative overflow-hidden group"
                             >
+                                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                                 🎮 Team Dashboard
                             </ShimmerButton>
                         </motion.div>
