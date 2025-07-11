@@ -5,7 +5,6 @@ import ShiftingCountdown from "../components/ui/countdown-timer";
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";
 import {Sparkles} from "lucide-react";
-import {CTA} from "../components/ui/cta";
 
 export default function Page() {
     const router = useRouter();
@@ -40,7 +39,7 @@ export default function Page() {
                 </div>
 
                 <div
-                    className="relative z-20 flex flex-col flex-grow px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-8 sm:pt-12 md:pt-16 lg:pt-20 justify-between sm:justify-center">
+                    className="relative z-20 flex flex-col justify-center min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 sm:py-12 md:py-16 lg:py-20">
                     <div className="flex flex-col items-center text-center gap-2 sm:gap-4 md:gap-6 pt-8 sm:pt-0">
                         <div className="w-20 h-14 sm:w-28 sm:h-18 md:w-36 md:h-22 lg:w-44 lg:h-26 xl:w-52 xl:h-32">
                             <CcsLogo className="w-full h-full"/>
@@ -54,27 +53,8 @@ export default function Page() {
                             OBSCURA
                         </h1>
 
-                        <div className="mt-4 sm:mt-6">
+                        <div className="mt-4 sm:mt-6 mb-8 sm:mb-12">
                             <ShiftingCountdown/>
-                        </div>
-                    </div>
-
-
-                    <div className="flex flex-col items-center pb-8 sm:pb-0 sm:mt-8">
-                        <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-xs sm:max-w-sm">
-                            <button
-                                onClick={handleLogin}
-                                className="w-full px-6 py-3 sm:px-8 sm:py-4 rounded-lg bg-[#ff3300] text-white font-bold text-sm sm:text-base md:text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_20px_4px_rgba(255,51,0,0.6),0_0_40px_8px_rgba(255,100,0,0.4)] hover:bg-[#ff5500] hover:shadow-[0_0_10px_8px_rgba(255,100,0,0.8),0_0_30px_12px_rgba(255,150,0,0.6)]"
-                            >
-                                Register Now
-                            </button>
-
-                            <button
-                                onClick={() => router.push("/Dashboard")}
-                                className="w-full px-6 py-3 sm:px-8 sm:py-4 rounded-lg bg-[#ff3300] text-white font-bold text-sm sm:text-base md:text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,100,0,0.8),0_0_60px_12px_rgba(255,150,0,0.6)] hover:bg-[#ff5500] hover:shadow-[0_0_10px_8px_rgba(255,100,0,0.8),0_0_30px_12px_rgba(255,150,0,0.6)]"
-                            >
-                                Team Dashboard
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -259,13 +239,12 @@ export default function Page() {
                             </motion.button>
 
                             <motion.button
-                                onClick={() => {/* Add demo handler */
-                                }}
+                                onClick={() => router.push("/Dashboard")}
                                 className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,165,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:scale-105 border border-orange-400/50"
                                 whileHover={{scale: 1.05}}
                                 whileTap={{scale: 0.95}}
                             >
-                                🎮 Play Demo
+                                🎮 Team Dashboard
                             </motion.button>
                         </motion.div>
                     </motion.div>
