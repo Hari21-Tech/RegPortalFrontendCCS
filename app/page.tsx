@@ -24,7 +24,7 @@ export default function Page() {
     return (
         <>
             <div
-                className="relative min-h-screen flex flex-col"
+                className="relative min-h-[80vh] sm:min-h-[90vh] md:min-h-screen flex flex-col"
                 style={{
                     backgroundImage: "url('/bg_image.png')",
                     backgroundSize: "cover",
@@ -32,36 +32,36 @@ export default function Page() {
                     backgroundRepeat: "no-repeat",
                 }}
             >
-                <div className="absolute inset-0 bg-black/30 md:bg-black/50 z-10"></div>
+                <div className="absolute inset-0 bg-black/50 md:bg-black/40 z-10"></div>
 
-                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-30">
+                <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30">
                     <button
                         onClick={() => router.push("/sponsors")}
-                        className="px-3 py-2 sm:px-4 sm:py-2 border-white/20 rounded-lg hover:bg-white/10 transition-all duration-300"
+                        className="px-3 py-2 sm:px-4 sm:py-3 border border-white/30 rounded-lg bg-black/30 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
                     >
             <span
-                className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl font-['GothamXNarrow'] uppercase tracking-wide">
+                className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl font-['GothamXNarrow'] uppercase tracking-wide">
               Our Sponsors
             </span>
                     </button>
                 </div>
 
                 <div
-                    className="relative z-20 flex flex-col justify-center min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 sm:py-12 md:py-16 lg:py-20">
-                    <div className="flex flex-col items-center text-center gap-2 sm:gap-4 md:gap-6 pt-8 sm:pt-0">
-                        <div className="w-20 h-14 sm:w-28 sm:h-18 md:w-36 md:h-22 lg:w-44 lg:h-26 xl:w-52 xl:h-32">
+                    className="relative z-20 flex flex-col justify-center items-center min-h-[80vh] sm:min-h-[90vh] md:min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-10 sm:py-12 md:py-16 lg:py-20">
+                    <div className="flex flex-col items-center text-center gap-4 sm:gap-6 md:gap-8 pt-8 sm:pt-0">
+                        <div className="w-24 h-16 sm:w-28 sm:h-18 md:w-36 md:h-22 lg:w-44 lg:h-26 xl:w-52 xl:h-32">
                             <CCSLogo className="w-full h-full"/>
                         </div>
 
-                        <h2 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Megarok'] leading-none tracking-wider drop-shadow-2xl">
+                        <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-['Megarok'] leading-none tracking-wider drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
                             PRESENTS
                         </h2>
 
-                        <h1 className="text-white text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-['Megarok'] leading-none tracking-wider drop-shadow-2xl">
+                        <h1 className="text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-['Megarok'] leading-none tracking-wider drop-shadow-[0_0_15px_rgba(0,0,0,0.9)]">
                             OBSCURA
                         </h1>
 
-                        <div className="mt-4 sm:mt-6 mb-8 sm:mb-12">
+                        <div className="mt-6 sm:mt-8 mb-8 sm:mb-12 w-full max-w-[320px] sm:max-w-full">
                             <ShiftingCountdown/>
                         </div>
                     </div>
