@@ -249,42 +249,7 @@ export default function Page() {
                     </motion.div>
                 </motion.div>
             </section>
-            <Footer
-                logo={<CCSLogo className="w-36"/>}
-                brandName=""
-                socialLinks={[
-                    {
-                        icon: <Instagram className="h-5 w-5"/>,
-                        href: "https://instagram.com/ccs_tiet",
-                        label: "Instagram",
-                    },
-                    {
-                        icon: <Github className="h-5 w-5"/>,
-                        href: "https://github.com/creative-computing-society/",
-                        label: "GitHub",
-                    },
-                    {
-                        icon: <LinkedinIcon className="h-5 w-5"/>,
-                        href: "https://www.linkedin.com/company/ccs-tiet",
-                        label: "Linkedin",
-                    },
-                ]}
-                mainLinks={[
-                    {href: "/register", label: "Register"},
-                    {href: "/Join", label: "Join Team"},
-                    {href: "/sponsors", label: "Sponsors"},
-                    // TODO: PLEASE ADD RULEBOOK ENDPOINT (BACKEND FETCHED)
-                    {href: "/rulebook", label: "Rulebook"},
-                ]}
-                legalLinks={[
-                    {href: "https://auth.ccstiet.com/privacy", label: "Privacy"},
-                    {href: "https://auth.ccstiet.com/privacy", label: "Terms"},
-                ]}
-                copyright={{
-                    text: "© 2025 Creative Computing Society",
-                    license: "All rights reserved",
-                }}
-            />
+    
         </>
     );
 }
