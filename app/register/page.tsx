@@ -5,9 +5,33 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CCSLogoLarge from "../_components/CCSLogoLarge";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function RegisterPage() {
   const router = useRouter();
+
+  const [registered, setRegistered] = useState(false);
+
+  const checkVerify = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/verify`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+      setRegistered(data.registered);
+      if (registered) {
+        router.push("/Dashboard");
+        return;
+      }
+      if (!res.ok) throw new Error(data.error);
+    } catch {
+      alert("Failed");
+    }
+  };
+  useEffect(() => {
+    checkVerify();
+  }, []);
 
   return (
     <div className="relative h-screen w-full overflow-hidden">

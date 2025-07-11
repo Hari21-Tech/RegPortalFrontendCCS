@@ -7,12 +7,16 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 // import {Footer} from "@/components/ui/footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const router = useRouter();
 
   const handleLogin = () => {
+    if (registered) {
+      router.push("/Dashboard");
+      return;
+    }
     window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`;
   };
 
@@ -20,6 +24,34 @@ export default function Page() {
   useEffect(() => {
     document.title = "Obscura";
   }, []);
+
+  const [registered, setRegistered] = useState(false);
+
+  const checkVerify = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/verify`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+      setRegistered(data.registered);
+      if (!res.ok) throw new Error(data.error);
+    } catch {
+      alert("Failed");
+    }
+  };
+  useEffect(() => {
+    checkVerify();
+  }, []);
+
+  const handleDashboardClick = () => {
+    if (registered) {
+      router.push("/Dashboard");
+      return;
+    } else {
+      window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`;
+    }
+  };
 
   return (
     <>
@@ -246,7 +278,7 @@ export default function Page() {
               </ShimmerButton>
 
               <ShimmerButton
-                onClick={() => router.push("/Dashboard")}
+                onClick={handleDashboardClick}
                 className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,165,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:scale-105 border border-orange-400/50"
               >
                 🎮 Team Dashboard
