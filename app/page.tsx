@@ -7,7 +7,7 @@ import {motion} from "framer-motion";
 import {Instagram, LinkedinIcon, Sparkles, Github} from "lucide-react";
 import {ShimmerButton} from "@/components/magicui/shimmer-button";
 import {Footer} from "@/components/ui/footer";
-
+import { useEffect } from "react";
 
 export default function Page() {
     const router = useRouter();
@@ -15,6 +15,11 @@ export default function Page() {
     const handleLogin = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`;
     };
+
+    // Set initial title on component mount
+    useEffect(() => {
+        document.title = "Obscura";
+    }, []);
 
     return (
         <>
