@@ -3,7 +3,7 @@
 import Bg from "./components/Bg";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import CcsLogo from "../_components/CcsLogo";
+import CCsLogoLarge from "../_components/CCsLogoLarge";
 import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
@@ -14,7 +14,7 @@ export default function RegisterPage() {
       <Bg />
 
       <div className="absolute top-4 left-4 md:top-8 md:left-8 z-10">
-        <CcsLogo />
+        <CCsLogoLarge />
       </div>
 
       <div className="flex justify-center h-full w-full">

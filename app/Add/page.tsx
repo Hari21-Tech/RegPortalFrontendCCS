@@ -11,7 +11,7 @@
 //   createTheme,
 // } from "@mui/material";
 // import AddBg from "./components/AddBg";
-// import CcsLogo from "../_components/CcsLogo";
+// import CCsLogoLarge from "../_components/CCsLogoLarge";
 // import { useRouter } from "next/navigation";
 
 // const darkTheme = createTheme({
@@ -149,7 +149,7 @@
 
 //         <Box className="relative z-10  pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
 //           <div className="flex items-center space-x-3">
-//             <CcsLogo />
+//             <CCsLogoLarge />
 //           </div>
 //         </Box>
 
@@ -288,7 +288,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import CcsLogo from "../_components/CcsLogo";
+import CCsLogoLarge from "../_components/CCsLogoLarge";
 
 const darkTheme = createTheme({
   palette: {
@@ -412,7 +412,7 @@ export default function CreateTeamPage() {
 
         <Box className="relative z-10 pt-1 md:pt-1 flex items-center justify-between p-4 md:p-6">
           <div className="flex items-center space-x-3">
-            <CcsLogo />
+            <CCsLogoLarge />
           </div>
         </Box>
 

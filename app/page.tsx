@@ -1,10 +1,13 @@
 "use client";
 
-import CcsLogo from "./_components/CcsLogo";
+import CCSLogo from "./_components/CCsLogoLarge";
 import ShiftingCountdown from "../components/ui/countdown-timer";
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";
-import {Sparkles} from "lucide-react";
+import {Instagram, LinkedinIcon, Sparkles, Github} from "lucide-react";
+import {ShimmerButton} from "@/components/magicui/shimmer-button";
+import {Footer} from "@/components/ui/footer";
+
 
 export default function Page() {
     const router = useRouter();
@@ -42,7 +45,7 @@ export default function Page() {
                     className="relative z-20 flex flex-col justify-center min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 sm:py-12 md:py-16 lg:py-20">
                     <div className="flex flex-col items-center text-center gap-2 sm:gap-4 md:gap-6 pt-8 sm:pt-0">
                         <div className="w-20 h-14 sm:w-28 sm:h-18 md:w-36 md:h-22 lg:w-44 lg:h-26 xl:w-52 xl:h-32">
-                            <CcsLogo className="w-full h-full"/>
+                            <CCSLogo className="w-full h-full"/>
                         </div>
 
                         <h2 className="text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-['Megarok'] leading-none tracking-wider drop-shadow-2xl">
@@ -229,27 +232,59 @@ export default function Page() {
                                 visible: {opacity: 1, y: 0}
                             }}
                         >
-                            <motion.button
+                            <ShimmerButton
                                 onClick={handleLogin}
-                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,51,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,51,0,0.6)] hover:scale-105 border border-red-400/50"
-                                whileHover={{scale: 1.05}}
-                                whileTap={{scale: 0.95}}
+                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-red-600 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_20px_rgba(255,51,0,0.4)] hover:shadow-[0_0_30px_rgba(255,51,0,0.6)] hover:scale-105 border border-red-700"
                             >
                                 🚀 Register Now
-                            </motion.button>
+                            </ShimmerButton>
 
-                            <motion.button
+                            <ShimmerButton
                                 onClick={() => router.push("/Dashboard")}
                                 className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,165,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:scale-105 border border-orange-400/50"
-                                whileHover={{scale: 1.05}}
-                                whileTap={{scale: 0.95}}
                             >
                                 🎮 Team Dashboard
-                            </motion.button>
+                            </ShimmerButton>
                         </motion.div>
                     </motion.div>
                 </motion.div>
             </section>
+            <Footer
+                logo={<CCSLogo className="w-36"/>}
+                brandName=""
+                socialLinks={[
+                    {
+                        icon: <Instagram className="h-5 w-5"/>,
+                        href: "https://instagram.com/ccs_tiet",
+                        label: "Instagram",
+                    },
+                    {
+                        icon: <Github className="h-5 w-5"/>,
+                        href: "https://github.com/creative-computing-society/",
+                        label: "GitHub",
+                    },
+                    {
+                        icon: <LinkedinIcon className="h-5 w-5"/>,
+                        href: "https://www.linkedin.com/company/ccs-tiet",
+                        label: "Linkedin",
+                    },
+                ]}
+                mainLinks={[
+                    {href: "/register", label: "Register"},
+                    {href: "/Join", label: "Join Team"},
+                    {href: "/sponsors", label: "Sponsors"},
+                    // TODO: PLEASE ADD RULEBOOK ENDPOINT (BACKEND FETCHED)
+                    {href: "/rulebook", label: "Rulebook"},
+                ]}
+                legalLinks={[
+                    {href: "https://auth.ccstiet.com/privacy", label: "Privacy"},
+                    {href: "https://auth.ccstiet.com/privacy", label: "Terms"},
+                ]}
+                copyright={{
+                    text: "© 2025 Creative Computing Society",
+                    license: "All rights reserved",
+                }}
+            />
         </>
     );
 }

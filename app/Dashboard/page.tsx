@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import CcsLogo from "../_components/CcsLogo";
+import CCsLogoLarge from "../_components/CCsLogoLarge";
 
 type Role = "WIZARD" | "HACKER";
 
@@ -264,7 +264,7 @@ export default function TeamDashboard() {
 
       <Container maxWidth="sm" className="relative z-10">
         <Box display="flex" justifyContent="center" mb={4}>
-          <CcsLogo />
+          <CCsLogoLarge />
         </Box>
 
         {members.length > 0 && renderMemberCard(members[0], 0, "LEADER")}

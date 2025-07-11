@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, Typography, Paper, Button } from "@mui/material";
-import CcsLogo from "../_components/CcsLogo";
+import CCsLogoLarge from "../_components/CCsLogoLarge";
 import { useSearchParams } from "next/navigation";
 
 export default function ThankYouPage() {
@@ -43,7 +43,7 @@ export default function ThankYouPage() {
       {/* Main Content */}
       <Container maxWidth="sm" className="relative z-10">
         <Box display="flex" justifyContent="center" mb={8}>
-          <CcsLogo />
+          <CCsLogoLarge />
         </Box>
 
         <Box className="text-center space-y-6 md:space-y-8">

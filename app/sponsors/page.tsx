@@ -1,7 +1,7 @@
 "use client";
 
-// import CcsLogo from "./_components/CcsLogo";
-import CcsLogo from "../_components/CcsLogo";
+// import CCsLogoLarge from "./_components/CCsLogoLarge";
+import CCsLogoLarge from "../_components/CCsLogoLarge";
 // import ShiftingCountdown from "../components/ui/countdown-timer";
 import Button from "@mui/material/Button";
 import { GridLegacy as Grid, Typography } from "@mui/material";
@@ -55,7 +55,7 @@ export default function Page() {
 
       <div className="flex flex-col items-center relative z-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-8 sm:pt-12 md:pt-16 lg:pt-12 xl:pt-16">
         <div className="w-24 h-16 sm:w-32 sm:h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 xl:w-56 xl:h-32 mb-4 md:mb-6">
-          <CcsLogo className="w-full h-full" />
+          <CCsLogoLarge className="w-full h-full" />
         </div>
 
         <h1 className="text-white text-[80px] sm:text-[80px] md:text-[160px] lg:text-[140px] xl:text-[180px] font-megarok text-center leading-none tracking-wider drop-shadow-2xl mb-2">
@@ -77,7 +77,7 @@ export default function Page() {
                   alignItems: "center",
                 }}
               >
-                <CcsLogo
+                <CCsLogoLarge
                   style={{ maxWidth: "100px", width: "100%", height: "auto" }}
                 />
               </div>
