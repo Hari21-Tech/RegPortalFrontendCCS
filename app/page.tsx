@@ -5,6 +5,7 @@ import ShiftingCountdown from "../components/ui/countdown-timer";
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";
 import {Sparkles} from "lucide-react";
+import {CTA} from "../components/ui/cta";
 
 export default function Page() {
     const router = useRouter();
@@ -79,12 +80,12 @@ export default function Page() {
                 </div>
             </div>
             <section id="section2"
-                     className="relative py-32 bg-gradient-to-br from-black via-indigo-950/20 to-black text-white overflow-hidden">
+                     className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
                 {/* Enhanced Background Effects */}
                 <div className="absolute inset-0">
                     {/* Animated gradient mesh */}
                     <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-rose-500/[0.1] via-red-500/[0.07] to-orange-500/[0.1]"
+                        className="absolute inset-0 bg-gradient-to-br from-red-500/[0.15] via-orange-500/[0.1] to-red-600/[0.12]"
                         animate={{
                             backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
                         }}
@@ -98,12 +99,36 @@ export default function Page() {
                         }}
                     />
 
+                    {/* Digital grid overlay */}
+                    <div className="absolute inset-0 opacity-10"
+                         style={{
+                             backgroundImage: `
+                                 linear-gradient(rgba(255,51,0,0.3) 1px, transparent 1px),
+                                 linear-gradient(90deg, rgba(255,51,0,0.3) 1px, transparent 1px)
+                             `,
+                             backgroundSize: '50px 50px'
+                         }}
+                    />
+
                     {/* Moving light orbs */}
                     <motion.div
-                        className="absolute top-1/3 left-1/5 w-72 h-72 bg-indigo-400/15 rounded-full blur-3xl"
+                        className="absolute top-1/4 left-1/6 w-48 sm:w-72 h-48 sm:h-72 bg-red-400/20 rounded-full blur-3xl"
                         animate={{
-                            x: [0, 150, 0],
-                            y: [0, 80, 0],
+                            x: [0, 100, 0],
+                            y: [0, 60, 0],
+                            scale: [1, 1.3, 1],
+                        }}
+                        transition={{
+                            duration: 18,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    />
+                    <motion.div
+                        className="absolute bottom-1/4 right-1/6 w-56 sm:w-80 h-56 sm:h-80 bg-orange-400/20 rounded-full blur-3xl"
+                        animate={{
+                            x: [0, -80, 0],
+                            y: [0, -40, 0],
                             scale: [1, 1.2, 1],
                         }}
                         transition={{
@@ -112,46 +137,33 @@ export default function Page() {
                             ease: "easeInOut"
                         }}
                     />
-                    <motion.div
-                        className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-rose-400/15 rounded-full blur-3xl"
-                        animate={{
-                            x: [0, -100, 0],
-                            y: [0, -60, 0],
-                            scale: [1, 1.3, 1],
-                        }}
-                        transition={{
-                            duration: 22,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                    />
 
                     {/* Floating particles */}
-                    {[...Array(12)].map((_, i) => (
+                    {[...Array(8)].map((_, i) => (
                         <motion.div
                             key={i}
-                            className="absolute w-1 h-1 bg-white/30 rounded-full"
+                            className="absolute w-1 h-1 bg-red-400/60 rounded-full"
                             style={{
-                                left: `${15 + (i * 7)}%`,
-                                top: `${25 + (i * 5)}%`,
+                                left: `${20 + (i * 8)}%`,
+                                top: `${30 + (i * 6)}%`,
                             }}
                             animate={{
-                                y: [0, -50, 0],
-                                opacity: [0.2, 1, 0.2],
-                                scale: [1, 2, 1],
+                                y: [0, -40, 0],
+                                opacity: [0.3, 1, 0.3],
+                                scale: [1, 1.5, 1],
                             }}
                             transition={{
-                                duration: 3 + i * 0.5,
+                                duration: 4 + i * 0.8,
                                 repeat: Infinity,
                                 ease: "easeInOut",
-                                delay: i * 0.3,
+                                delay: i * 0.4,
                             }}
                         />
                     ))}
                 </div>
 
                 <motion.div
-                    className="relative z-10 max-w-7xl mx-auto px-6"
+                    className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8"
                     variants={{
                         hidden: {opacity: 0},
                         visible: {
@@ -168,54 +180,94 @@ export default function Page() {
                 >
                     {/* Header */}
                     <motion.div
-                        className="text-center mb-20"
+                        className="text-center mb-12 sm:mb-16 md:mb-20"
                         variants={{
                             hidden: {opacity: 0, y: 60},
                             visible: {opacity: 1, y: 0}
                         }}
                     >
                         <motion.div
-                            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm mb-6"
-                            whileHover={{scale: 1.05, borderColor: "rgba(255, 255, 255, 0.3)"}}
+                            className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 backdrop-blur-sm mb-8"
+                            whileHover={{scale: 1.05, borderColor: "rgba(255, 51, 0, 0.5)"}}
                         >
                             <motion.div
                                 animate={{rotate: 360}}
                                 transition={{duration: 3, repeat: Infinity, ease: "linear"}}
                             >
-                                <Sparkles className="h-4 w-4 text-indigo-300"/>
+                                <Sparkles className="h-4 w-4 text-red-400"/>
                             </motion.div>
-                            <span className="text-sm font-medium text-white/80">
-              ✨ Client Success Stories
-            </span>
-                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"/>
+                            <span
+                                className="text-sm font-medium text-white/90 font-['GothamXNarrow'] uppercase tracking-wide">
+                400+ HACKERS REGISTERED
+              </span>
+                            <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"/>
                         </motion.div>
 
                         <motion.h2
-                            className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight"
+                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-['Megarok'] mb-6 tracking-wider leading-tight"
                             variants={{
                                 hidden: {opacity: 0, y: 60},
                                 visible: {opacity: 1, y: 0}
                             }}
                         >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-              Hack The Maze
-            </span>
-                            <br/>
+              <span
+                  className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-red-300 drop-shadow-lg">
+                HACK THE MAZE
+              </span>
                         </motion.h2>
 
                         <motion.p
-                            className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed"
+                            className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed mb-8 font-['GothamXNarrow']"
                             variants={{
                                 hidden: {opacity: 0, y: 60},
                                 visible: {opacity: 1, y: 0}
                             }}
-                        >In a fractured realm between logic and sorcery, a rogue demonic entity named Obscura has
-                            hijacked the overworld&apos;s robotic army and fractured two souls into hacker and wizard. Now
+                        >
+                            In a <span className="text-red-400 font-bold">fractured realm</span> between logic and
+                            sorcery, a rogue demonic entity named <span
+                            className="text-orange-400 font-bold">Obscura</span> has
+                            hijacked the overworld's robotic army and fractured two souls into hacker and wizard. Now
                             trapped in a shifting digital labyrinth, you and your team must outwit firewalls, dodge
-                            arcane traps, and decode corrupted transmissions. Obscura&apos;s power grows with every passing
-                            minute — can you sever the portal and escape before you&apos;re consumed by the maze?
+                            arcane traps, and decode corrupted transmissions.
                         </motion.p>
-                        Are you smart enough to escape? Or will the glitch claim you too?
+
+                        <motion.p
+                            className="text-xl sm:text-2xl md:text-3xl text-red-300 font-['Megarok'] mb-12 tracking-wide"
+                            variants={{
+                                hidden: {opacity: 0, y: 60},
+                                visible: {opacity: 1, y: 0}
+                            }}
+                        >
+                            Are you smart enough to escape? Or will the glitch claim you too?
+                        </motion.p>
+
+                        {/* Action Buttons */}
+                        <motion.div
+                            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center max-w-lg mx-auto"
+                            variants={{
+                                hidden: {opacity: 0, y: 60},
+                                visible: {opacity: 1, y: 0}
+                            }}
+                        >
+                            <motion.button
+                                onClick={handleLogin}
+                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,51,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,51,0,0.6)] hover:scale-105 border border-red-400/50"
+                                whileHover={{scale: 1.05}}
+                                whileTap={{scale: 0.95}}
+                            >
+                                🚀 Register Now
+                            </motion.button>
+
+                            <motion.button
+                                onClick={() => {/* Add demo handler */
+                                }}
+                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-orange-600 to-orange-500 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out shadow-[0_0_30px_8px_rgba(255,165,0,0.4)] hover:shadow-[0_0_40px_12px_rgba(255,165,0,0.6)] hover:scale-105 border border-orange-400/50"
+                                whileHover={{scale: 1.05}}
+                                whileTap={{scale: 0.95}}
+                            >
+                                🎮 Play Demo
+                            </motion.button>
+                        </motion.div>
                     </motion.div>
                 </motion.div>
             </section>
