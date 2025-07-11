@@ -1,6 +1,6 @@
 "use client";
 
-import CCSLogo from "./_components/CCsLogoLarge";
+import CCSLogo from "./_components/CCSLogoLarge";
 import ShiftingCountdown from "../components/ui/countdown-timer";
 import {useRouter} from "next/navigation";
 import {motion} from "framer-motion";

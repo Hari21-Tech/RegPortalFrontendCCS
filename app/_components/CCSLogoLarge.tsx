@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const CCsLogoLarge: React.FC<
+const CCSLogoLarge: React.FC<
   React.SVGProps<SVGElement> & { className?: string }
 > = ({ className, ...props }) => (
   <svg
@@ -33,4 +33,4 @@ const CCsLogoLarge: React.FC<
   </svg>
 );
 
-export default CCsLogoLarge;
+export default CCSLogoLarge;
