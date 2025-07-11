@@ -121,12 +121,12 @@ export default function TeamDashboard() {
   const getRole = (member: Member) => (member.is_hacker ? "HACKER" : "WIZARD");
 
   // Use local images for avatars - alternating between scarra and scurra based on index
-  const getAvatarUrl = (index: number) =>
-    index % 2 === 0 ? "/scarra.png" : "/scurra.png";
+  const getAvatarUrl = (role: string) =>
+    // index % 2 === 0 ? "/scarra.png" : "/scurra.png";
+    role === "WIZARD" ? "scarra.png" : "scurra.png";
 
   const renderCard = (member: Member, index: number, label: string) => {
     const role = getRole(member);
-    console.log(role);
     const bgColor = role === "HACKER" ? "#1E3A8A" : "#7F1D1D"; // blue/red
     const badgeColor = role === "HACKER" ? "#3B82F6" : "#EF4444";
 
@@ -156,7 +156,7 @@ export default function TeamDashboard() {
           }}
         >
           <img
-            src={getAvatarUrl(index)}
+            src={getAvatarUrl(role)}
             alt="avatar"
             width="60"
             height="60"
@@ -237,7 +237,7 @@ export default function TeamDashboard() {
       }}
     >
       {/* Dark overlay to dim the background */}
-      <Box 
+      <Box
         sx={{
           position: "absolute",
           top: 0,
@@ -248,8 +248,14 @@ export default function TeamDashboard() {
           zIndex: 0,
         }}
       />
-      
-      <Box width="100%" display="flex" justifyContent="space-between" mb={4} sx={{ position: "relative", zIndex: 1 }}>
+
+      <Box
+        width="100%"
+        display="flex"
+        justifyContent="space-between"
+        mb={4}
+        sx={{ position: "relative", zIndex: 1 }}
+      >
         <CCSLogoLarge />
         <Button onClick={handleLogout} color="error" variant="contained">
           Logout

@@ -6,7 +6,7 @@ export function middleware(req: NextRequest) {
 
   if (!token) {
     // alert("Access Denied , Kindly Login");
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("127.0.0.1:3000/", req.url));
   }
 
   return NextResponse.next();

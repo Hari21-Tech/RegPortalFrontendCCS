@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Box } from "@mui/material";
 
 export default function JoinTeam() {
   const router = useRouter();
@@ -53,6 +54,15 @@ export default function JoinTeam() {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden flex flex-col">
+      <Box className="absolute top-4 right-4 z-20">
+        <Button
+          onClick={() => router.push("/")}
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2"
+        >
+          Home
+        </Button>
+      </Box>
+
       {/* Red Circuit Background */}
       <div className="absolute inset-0 z-0">
         <div

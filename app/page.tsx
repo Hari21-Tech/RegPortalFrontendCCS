@@ -38,6 +38,7 @@ export default function Page() {
       if (!res.ok) throw new Error(data.error);
     } catch {
       alert("Failed");
+      setRegistered(false);
     }
   };
   useEffect(() => {
@@ -262,21 +263,21 @@ export default function Page() {
               Are you smart enough to escape? Or will the glitch claim you too?
             </motion.p>
 
-                        {/* Action Buttons */}
-                        <motion.div
-                            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center max-w-lg mx-auto"
-                            variants={{
-                                hidden: {opacity: 0, y: 60},
-                                visible: {opacity: 1, y: 0}
-                            }}
-                        >
-                            <ShimmerButton
-                                onClick={handleLogin}
-                                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-purple-700 to-indigo-900 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out border-2 border-purple-500/70 hover:border-purple-400 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-800 hover:to-indigo-950 relative overflow-hidden group"
-                            >
-                                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                                🚀 Register Now
-                            </ShimmerButton>
+            {/* Action Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center max-w-lg mx-auto"
+              variants={{
+                hidden: { opacity: 0, y: 60 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <ShimmerButton
+                onClick={handleLogin}
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-gradient-to-r from-purple-700 to-indigo-900 text-white font-bold text-lg font-['GothamXNarrow'] uppercase tracking-wide transition-all duration-300 ease-in-out border-2 border-purple-500/70 hover:border-purple-400 hover:scale-105 hover:bg-gradient-to-r hover:from-purple-800 hover:to-indigo-950 relative overflow-hidden group"
+              >
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-400/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                🚀 Register Now
+              </ShimmerButton>
 
               <ShimmerButton
                 onClick={handleDashboardClick}

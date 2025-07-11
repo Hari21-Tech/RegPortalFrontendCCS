@@ -18,9 +18,8 @@ export default function RegisterPage() {
         credentials: "include",
       });
       const data = await res.json();
-      console.log(data);
       setRegistered(data.registered);
-      if (registered) {
+      if (data.registered) {
         router.push("/Dashboard");
         return;
       }
@@ -61,7 +60,8 @@ export default function RegisterPage() {
                 borderRadius: { xs: "20px", md: "27px" },
                 transition: "all 0.3s ease",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #4338CA 0%, #3730A3 100%)",
+                  background:
+                    "linear-gradient(135deg, #4338CA 0%, #3730A3 100%)",
                   transform: "translateY(-3px)",
                   border: "2px solid rgba(139, 92, 246, 0.8)",
                 },
@@ -90,7 +90,8 @@ export default function RegisterPage() {
                 borderRadius: { xs: "20px", md: "27px" },
                 transition: "all 0.3s ease",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #6D28D9 0%, #8B5CF6 100%)",
+                  background:
+                    "linear-gradient(135deg, #6D28D9 0%, #8B5CF6 100%)",
                   transform: "translateY(-3px)",
                   border: "2px solid rgba(167, 139, 250, 0.8)",
                 },

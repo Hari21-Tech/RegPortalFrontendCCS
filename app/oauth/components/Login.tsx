@@ -12,7 +12,7 @@ function Login() {
   }, []);
 
   const handleLogin = () => {
-    window.location.href = "http://127.0.0.1:3021/login";
+    window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`;
   };
 
   return (
