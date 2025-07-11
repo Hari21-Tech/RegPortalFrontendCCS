@@ -120,10 +120,9 @@ export default function TeamDashboard() {
 
   const getRole = (member: Member) => (member.is_hacker ? "HACKER" : "WIZARD");
 
-  const getAvatarUrl = (name: string) =>
-    `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${encodeURIComponent(
-      name
-    )}`;
+  // Use local images for avatars - alternating between scarra and scurra based on index
+  const getAvatarUrl = (index: number) =>
+    index % 2 === 0 ? "/scarra.png" : "/scurra.png";
 
   const renderCard = (member: Member, index: number, label: string) => {
     const role = getRole(member);
@@ -157,7 +156,7 @@ export default function TeamDashboard() {
           }}
         >
           <img
-            src={getAvatarUrl(member.name)}
+            src={getAvatarUrl(index)}
             alt="avatar"
             width="60"
             height="60"
@@ -229,7 +228,7 @@ export default function TeamDashboard() {
 
   return (
     <Box
-      className="min-h-screen flex flex-col items-center justify-start p-4 pb-32"
+      className="min-h-screen flex flex-col items-center justify-start p-4 pb-32 relative"
       sx={{
         backgroundImage: "url('/bg_image_old.png')",
         backgroundSize: "cover",
@@ -237,14 +236,27 @@ export default function TeamDashboard() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Box width="100%" display="flex" justifyContent="space-between" mb={4}>
+      {/* Dark overlay to dim the background */}
+      <Box 
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.65)", // Dimming overlay
+          zIndex: 0,
+        }}
+      />
+      
+      <Box width="100%" display="flex" justifyContent="space-between" mb={4} sx={{ position: "relative", zIndex: 1 }}>
         <CCSLogoLarge />
         <Button onClick={handleLogout} color="error" variant="contained">
           Logout
         </Button>
       </Box>
 
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" sx={{ position: "relative", zIndex: 1 }}>
         <Box textAlign="center" mb={3}>
           <Typography variant="h6" fontWeight="bold" color="red">
             TEAM CODE

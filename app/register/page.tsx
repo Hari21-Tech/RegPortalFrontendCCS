@@ -53,15 +53,18 @@ export default function RegisterPage() {
             <Button
               onClick={() => router.push("/Join")}
               sx={{
-                bgcolor: "black",
+                background: "linear-gradient(135deg, #3730A3 0%, #312E81 100%)",
                 width: "100%",
                 height: { xs: "60px", sm: "65px", md: "80px" },
                 maxWidth: { xs: "320px", md: "400px" },
-                boxShadow: {
-                  xs: "0px 0px 3px 3px #FFFFFFCF",
-                  md: "0px 0px 10px 10px #FFFFFFCF",
-                },
+                border: "2px solid rgba(124, 58, 237, 0.5)",
                 borderRadius: { xs: "20px", md: "27px" },
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  background: "linear-gradient(135deg, #4338CA 0%, #3730A3 100%)",
+                  transform: "translateY(-3px)",
+                  border: "2px solid rgba(139, 92, 246, 0.8)",
+                },
               }}
             >
               <Typography
@@ -79,15 +82,18 @@ export default function RegisterPage() {
             <Button
               onClick={() => router.push("/Add")}
               sx={{
-                bgcolor: "black",
+                background: "linear-gradient(135deg, #5B21B6 0%, #7E22CE 100%)",
                 width: "100%",
                 height: { xs: "60px", sm: "65px", md: "80px" },
                 maxWidth: { xs: "320px", md: "400px" },
-                boxShadow: {
-                  xs: "0px 0px 3px 3px #FFFFFFCF",
-                  md: "0px 0px 10px 10px #FFFFFFCF",
-                },
+                border: "2px solid rgba(139, 92, 246, 0.5)",
                 borderRadius: { xs: "20px", md: "27px" },
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  background: "linear-gradient(135deg, #6D28D9 0%, #8B5CF6 100%)",
+                  transform: "translateY(-3px)",
+                  border: "2px solid rgba(167, 139, 250, 0.8)",
+                },
               }}
             >
               <Typography
