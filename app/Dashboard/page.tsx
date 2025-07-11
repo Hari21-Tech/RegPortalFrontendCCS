@@ -2,13 +2,16 @@
 
 import {
   Box,
+  Button,
+  Card,
   Container,
   Typography,
-  Card,
   ToggleButton,
   ToggleButtonGroup,
-  Button,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
+import { ContentCopy } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import CCSLogoLarge from "../_components/CCSLogoLarge";
 
@@ -16,56 +19,61 @@ type Role = "WIZARD" | "HACKER";
 
 type Member = {
   email: string;
-  is_wizard: boolean;
-  is_hacker: boolean;
   name: string;
   id: string;
+  is_wizard: boolean;
+  is_hacker: boolean;
 };
 
 export default function TeamDashboard() {
   const [members, setMembers] = useState<Member[]>([]);
   const [teamCode, setTeamCode] = useState("");
   const [isLeader, setIsLeader] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const fetchDashboard = async () => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`,
-        {
-          credentials: "include",
-        }
-      );
-
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`, {
+        credentials: "include",
+      });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to fetch dashboard");
+      if (!res.ok) throw new Error(data.error);
 
       const players: Member[] = data.players.map((p: any) => ({
         name: p.name,
         email: p.email,
         id: p.id,
-        // phone: p.phone,
-        is_wizard: p.is_wizard ?? true,
+        is_wizard: p.is_wizard ?? false,
         is_hacker: p.is_hacker ?? false,
       }));
 
       setMembers(players);
       setTeamCode(data.team_code);
       setIsLeader(data.is_leader);
-    } catch (err) {
-      alert("Could not fetch dashboard");
+    } catch {
+      alert("Failed to load dashboard.");
     }
   };
 
   const handleRoleChange = (index: number, role: Role | null) => {
     if (!role) return;
 
+    const hackerCount = members.filter((m) => m.is_hacker).length;
+    const wizardCount = members.filter((m) => m.is_wizard).length;
+
+    const isCurrentlyHacker = members[index].is_hacker;
+    const isCurrentlyWizard = members[index].is_wizard;
+
+    if (role === "HACKER" && hackerCount >= 2 && !isCurrentlyHacker) return;
+    if (role === "WIZARD" && wizardCount >= 2 && !isCurrentlyWizard) return;
+
     setMembers((prev) =>
       prev.map((m, i) =>
         i === index
           ? {
               ...m,
-              is_wizard: role === "WIZARD",
               is_hacker: role === "HACKER",
+              is_wizard: role === "WIZARD",
             }
           : m
       )
@@ -73,215 +81,185 @@ export default function TeamDashboard() {
   };
 
   const handleSave = async () => {
-    const payload = {
-      team_code: teamCode,
-      players: members,
-    };
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ team_code: teamCode, players: members }),
+    });
 
-    // console.log(`players:${members}`);
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/team-dashboard`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Unknown error");
-
-      alert("Saved successfully!");
-    } catch (err) {
-      alert(
-        `Save failed: ${err instanceof Error ? err.message : "Unknown error"}`
-      );
-    }
+    const data = await res.json();
+    if (!res.ok) alert(data.error || "Save failed");
+    else alert("Roles saved successfully!");
   };
+
   const handleLogout = async () => {
-    console.log("Logout oressed");
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.detail || "Logout failed");
-      }
-
-      alert("Logged out successfully!");
-
-      window.location.href = "/";
-    } catch (err) {
-      console.error("Logout error:", err);
-      alert("An error occurred during logout");
-    }
+    const data = await res.json();
+    if (!res.ok) alert("Logout failed");
+    else window.location.href = "/";
   };
 
   useEffect(() => {
     fetchDashboard();
   }, []);
 
-  const renderMemberCard = (member: Member, index: number, label: string) => (
-    <Box key={index} className="text-center mb-8">
-      <Typography
-        className="text-white text-2xl md:text-4xl font-bold mb-4 tracking-wider"
-        sx={{ fontFamily: "monospace" }}
-      >
-        {label}
-      </Typography>
+  const getRole = (member: Member) => (member.is_hacker ? "HACKER" : "WIZARD");
+
+  const getAvatarUrl = (name: string) =>
+    `https://api.dicebear.com/7.x/fun-emoji/svg?seed=${encodeURIComponent(name)}`;
+
+  const renderCard = (member: Member, index: number, label: string) => {
+    const role = getRole(member);
+    const bgColor = role === "HACKER" ? "#1E3A8A" : "#7F1D1D"; // blue/red
+    const badgeColor = role === "HACKER" ? "#3B82F6" : "#EF4444";
+
+    return (
       <Card
-        sx={{ bgcolor: "black", boxShadow: "0px 0px 5px 5px #FF0000" }}
-        className="p-4 space-y-3"
+        key={index}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          bgcolor: "#111",
+          border: `2px solid ${badgeColor}`,
+          borderRadius: "12px",
+          padding: "1rem",
+          marginBottom: "1.5rem",
+          flexWrap: "wrap",
+        }}
       >
-        {["name", "email", "phone"].map((key) => (
-          <Box
-            key={key}
-            className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2"
-          >
-            <Typography
-              className="text-red-500 font-bold text-xs md:text-sm"
-              sx={{ fontFamily: "monospace" }}
-            >
-              {key.toUpperCase()}:
-            </Typography>
-            <Typography
-              className="text-red-500 font-bold text-xs md:text-sm break-all"
-              sx={{ fontFamily: "monospace" }}
-            >
-              {(member as any)[key]}
-            </Typography>
-          </Box>
-        ))}
-        <Box className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-          <Typography
-            className="text-red-500 font-bold text-xs md:text-sm"
-            sx={{ fontFamily: "monospace" }}
-          >
-            ROLE:
+        <Box
+          sx={{
+            width: 60,
+            height: 60,
+            minWidth: 60,
+            borderRadius: "8px",
+            overflow: "hidden",
+            mr: 2,
+            backgroundColor: "#000",
+          }}
+        >
+          <img
+            src={getAvatarUrl(member.name)}
+            alt="avatar"
+            width="60"
+            height="60"
+            className="object-cover"
+          />
+        </Box>
+
+        <Box sx={{ flex: "1 1 auto", color: "white" }}>
+          <Typography fontWeight={600}>{member.name}</Typography>
+          <Typography variant="body2" color="gray">
+            {member.email}
           </Typography>
-          <ToggleButtonGroup
-            value={member.is_wizard ? "WIZARD" : "HACKER"}
-            exclusive
-            onChange={(e, role) => handleRoleChange(index, role)}
-            sx={{
-              border: "2px solid #1a1a1a",
-              borderRadius: "6px",
-              backgroundColor: "#0a0a0a",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: "0.5rem",
-              "& .MuiToggleButton-root": {
-                fontFamily: "monospace",
-                fontWeight: "bold",
-                fontSize: "0.75rem",
-                color: "#ffffff",
-                borderColor: "#333333",
-                backgroundColor: "#1a1a1a",
-                padding: "6px 12px",
-                flex: "1 1 40%",
-                minWidth: "100px",
-                transition: "all 0.2s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#2a2a2a",
-                  borderColor: "#dc2626",
-                  color: "#ffffff",
-                  transform: "translateY(-1px)",
-                  boxShadow: "0 2px 8px rgba(220, 38, 38, 0.3)",
-                },
-                "&.Mui-selected": {
-                  backgroundColor: "#dc2626",
-                  color: "#ffffff",
-                  borderColor: "#dc2626",
-                  boxShadow:
-                    "0 0 10px rgba(220, 38, 38, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                  "&:hover": {
-                    backgroundColor: "#b91c1c",
-                    borderColor: "#b91c1c",
-                    transform: "translateY(-1px)",
-                    boxShadow:
-                      "0 4px 12px rgba(220, 38, 38, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+        </Box>
+
+        {isLeader ? (
+          <Box sx={{ display: "flex", alignItems: "center", mt: { xs: 2, sm: 0 } }}>
+            <ToggleButtonGroup
+              value={role}
+              exclusive
+              onChange={(e, r) => handleRoleChange(index, r)}
+              sx={{
+                bgcolor: "#1a1a1a",
+                borderRadius: 2,
+                "& .MuiToggleButton-root": {
+                  color: "#fff",
+                  borderColor: "#333",
+                  "&.Mui-selected": {
+                    bgcolor: badgeColor,
+                    borderColor: badgeColor,
                   },
                 },
-              },
+              }}
+            >
+              <ToggleButton value="HACKER">Hacker</ToggleButton>
+              <ToggleButton value="WIZARD">Wizard</ToggleButton>
+            </ToggleButtonGroup>
+
+            {/* Kick Button */}
+            {index !== 0 && (
+              <Button
+                size="small"
+                color="error"
+                sx={{ ml: 2, textTransform: "none" }}
+                onClick={() => alert("Kick not implemented")}
+              >
+                Kick
+              </Button>
+            )}
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              mt: { xs: 2, sm: 0 },
+              backgroundColor: badgeColor,
+              color: "white",
+              fontWeight: "bold",
+              px: 2,
+              py: 0.5,
+              borderRadius: "8px",
             }}
           >
-            <ToggleButton value="WIZARD">WIZARD</ToggleButton>
-            <ToggleButton value="HACKER">HACKER</ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
+            {role}
+          </Box>
+        )}
       </Card>
-    </Box>
-  );
+    );
+  };
 
   return (
-    <Box className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4 pb-32">
-      <Box className="absolute inset-0 opacity-30">
-        <svg width="100%" height="100%" className="absolute inset-0">
-          <defs>
-            <pattern
-              id="circuit"
-              x="0"
-              y="0"
-              width="100"
-              height="100"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M20 20h60v20h-20v20h-20v20h-20z"
-                fill="none"
-                stroke="#dc2626"
-                strokeWidth="2"
-              />
-              <path
-                d="M80 40h-20v20h20v20h-40v-20h-20"
-                fill="none"
-                stroke="#dc2626"
-                strokeWidth="2"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#circuit)" />
-        </svg>
-      </Box>
-      <Box position="absolute" top={4} right={4}>
-        <Button
-          onClick={handleLogout}
-          sx={{ bgcolor: "red", borderRadius: "8px" }}
-        >
-          <Typography color="white">Log Out</Typography>
+    <Box
+      className="min-h-screen flex flex-col items-center justify-start p-4 pb-32"
+      sx={{
+        backgroundImage: "url('/bg_image_old.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <Box width="100%" display="flex" justifyContent="space-between" mb={4}>
+        <CCSLogoLarge />
+        <Button onClick={handleLogout} color="error" variant="contained">
+          Logout
         </Button>
       </Box>
 
-      <Container maxWidth="sm" className="relative z-10">
-        <Box display="flex" justifyContent="center" mb={4}>
-          <CCSLogoLarge />
+      <Container maxWidth="sm">
+        <Box textAlign="center" mb={3}>
+          <Typography variant="h6" fontWeight="bold" color="red">
+            TEAM CODE
+          </Typography>
+          <Typography variant="h4" fontWeight="bold" color="white">
+            {teamCode}{" "}
+            <Tooltip title={copied ? "Copied!" : "Copy"}>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  navigator.clipboard.writeText(teamCode);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 1000);
+                }}
+              >
+                <ContentCopy sx={{ color: "white", fontSize: "1rem" }} />
+              </IconButton>
+            </Tooltip>
+          </Typography>
         </Box>
 
-        {members.length > 0 && renderMemberCard(members[0], 0, "LEADER")}
-        {members
-          .slice(1)
-          .map((member, i) =>
-            renderMemberCard(member, i + 1, `MEMBER ${i + 1}`)
-          )}
+        {members.map((member, i) =>
+          renderCard(member, i, i === 0 ? "LEADER" : `MEMBER ${i}`)
+        )}
 
         {isLeader && (
-          <Box className="flex justify-center mt-8">
-            <Button
-              sx={{ bgcolor: "red", borderRadius: "8px" }}
-              onClick={handleSave}
-              className="bg-transparent border-2 border-white text-white hover:bg-red-600 hover:border-red-600 font-bold tracking-wide"
-            >
-              <Typography color="white">Save Roles</Typography>
+          <Box textAlign="center" mt={4}>
+            <Button variant="contained" color="error" onClick={handleSave}>
+              SAVE ROLES
             </Button>
           </Box>
         )}
