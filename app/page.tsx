@@ -10,7 +10,7 @@ import { Instagram, LinkedinIcon, Sparkles, Github } from "lucide-react";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { useEffect } from "react";
 
-// Define sponsor type
+// Define sponsor type // This should match the structure of your sponsor data
 type Sponsor = {
   id: number;
   name: string;
