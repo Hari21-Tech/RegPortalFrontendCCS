@@ -3,7 +3,6 @@
     {
       "source": "/Build/(.*)\\.js\\.gz",
       "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
         { "key": "Content-Type", "value": "application/javascript" },
         { "key": "Cache-Control", "value": "no-store" }
       ]
@@ -11,7 +10,6 @@
     {
       "source": "/Build/(.*)\\.wasm\\.gz",
       "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
         { "key": "Content-Type", "value": "application/wasm" },
         { "key": "Cache-Control", "value": "no-store" }
       ]
@@ -19,7 +17,6 @@
     {
       "source": "/Build/(.*)\\.data\\.gz",
       "headers": [
-        { "key": "Content-Encoding", "value": "gzip" },
         { "key": "Content-Type", "value": "application/octet-stream" },
         { "key": "Cache-Control", "value": "no-store" }
       ]
